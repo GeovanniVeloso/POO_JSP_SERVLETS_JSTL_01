@@ -52,7 +52,9 @@ public class ContaPoupançaServlet extends HttpServlet {
 				for(int i = 0; i < size; i++) {
 					cp = Poupancas.get(i);
 					if(cp.getNum_conta() == Integer.parseInt(numConta)) {
-						request.setAttribute("conta", cp);
+						ArrayList<ContaPoupanca> ContaP = new ArrayList<>();
+						ContaP.add(cp);
+						request.setAttribute("conta", ContaP);
 						i = size;
 					}
 				}

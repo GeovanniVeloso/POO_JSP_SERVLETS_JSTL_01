@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Conta Poupança</title>
+<title>Conta Especial</title>
 </head>
 <body>
 
@@ -14,7 +14,7 @@
 			<li><a href="index.jsp">Home</a></li>
 			<li><a href="contaPoupancaCadastro.jsp">Cadastro Poupança</a></li>
 			<li><a href="contaEspecialCadastro.jsp">Cadastro Especial</a></li>
-			<li><a href="contaPoupancaOP.jsp">Operações Poupança</a></li>
+			<li><a href="contaEspecialOP.jsp">Operações Especial</a></li>
 		</ul>
 	</nav>
 
@@ -34,8 +34,8 @@
 						placeholder="Saldo" required="required"></td>
 				</tr>
 				<tr>
-					<td><input type="number" min="0" step="1" max="31"
-						id="dataRend" name="dataRend" placeholder="Data de Rendimento"
+					<td><input type="number" min="0" 
+						id="limite" name="limite" placeholder="Limite"
 						required="required"></td>
 				</tr>
 				<tr>

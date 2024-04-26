@@ -14,6 +14,7 @@
 		<ul>
 			<li><a href="index.jsp">Home</a></li>
 			<li><a href="contaPoupancaCadastro.jsp">Cadastro Poupança</a></li>
+			<li><a href="contaEspecialCadastro.jsp">Cadastro Especial</a></li>
 		</ul>
 	</nav>
 	<div align="center">
