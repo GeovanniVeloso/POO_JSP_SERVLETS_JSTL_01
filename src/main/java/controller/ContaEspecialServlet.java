@@ -6,19 +6,20 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.ContaEspecial;
 import model.ContaPoupanca;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-@WebServlet("/ContaPoupança")
-public class ContaPoupançaServlet extends HttpServlet {
+@WebServlet("/ContaEspecial")
+public class ContaEspecialServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    
-	private ArrayList<ContaPoupanca> Poupancas;
+
+	ArrayList<ContaEspecial> Especiais;
 	
-    public ContaPoupançaServlet() {
-        Poupancas = new ArrayList<>();
+    public ContaEspecialServlet() {
+    	Especiais = new ArrayList<>();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -27,29 +28,28 @@ public class ContaPoupançaServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		String cmd = request.getParameter("enviar");
-		ContaPoupanca cp = new ContaPoupanca();
+		ContaEspecial ce = new ContaEspecial();
 		request.setAttribute("Conta não achada", 0);
 		String saida ="";
 		
 		if(cmd.equals("Cadastrar")) {
 			
-			saida = cadastrarConta(cp, request, response);
+			saida = cadastrarConta(ce, request, response);
 			request.setAttribute("saida", saida);
 			
 		}else {
 			if(cmd.equals("Consultar")) {
 				String numConta = request.getParameter("numConta");
 				
-				int size = Poupancas.size();
+				int size = Especiais.size();
 				if(size > 0) {
 					for(int i = 0; i < size; i++) {
-						cp = Poupancas.get(i);
-						if(cp.getNum_conta() == Integer.parseInt(numConta)) {
-							ArrayList<ContaPoupanca> conta = new ArrayList<>();
-							conta.add(cp);
-							request.setAttribute("conta", conta);
+						ce = Especiais.get(i);
+						if(ce.getNum_conta() == Integer.parseInt(numConta)) {
+							ArrayList<ContaEspecial> ContaE = new ArrayList<>();
+							ContaE.add(ce);
+							request.setAttribute("conta", ContaE);
 							i = size;
 						}
 					}
@@ -61,15 +61,15 @@ public class ContaPoupançaServlet extends HttpServlet {
 				if(cmd.equals("Sacar")) {
 					String numConta = request.getParameter("numConta");
 					int saldoOP = Integer.parseInt(request.getParameter("saldoOP"));
-					int size = Poupancas.size();
+					int size = Especiais.size();
 					
 					saida = "Conta não Encotrada";
 					
 					for(int i = 0; i < size; i++) {
-						cp = Poupancas.get(i);
-						if(cp.getNum_conta() == Integer.parseInt(numConta)) {
-							if(cp.getSaldo()>=saldoOP) {
-								cp.sacar(saldoOP);
+						ce = Especiais.get(i);
+						if(ce.getNum_conta() == Integer.parseInt(numConta)) {
+							if(ce.getSaldo()>=saldoOP) {
+								ce.sacar(saldoOP);
 								i = size;
 								saida = "Saque efetuado!";
 							}else {
@@ -81,14 +81,14 @@ public class ContaPoupançaServlet extends HttpServlet {
 				}else {
 					String numConta = request.getParameter("numConta");
 					int saldoOP = Integer.parseInt(request.getParameter("saldoOP"));
-					int size = Poupancas.size();
+					int size = Especiais.size();
 					
 					saida = "Conta não Encotrada";
 					
 					for(int i = 0; i < size; i++) {
-						cp = Poupancas.get(i);
-						if(cp.getNum_conta() == Integer.parseInt(numConta)) {
-							cp.depositar(saldoOP);
+						ce = Especiais.get(i);
+						if(ce.getNum_conta() == Integer.parseInt(numConta)) {
+							ce.depositar(saldoOP);
 							i = size;
 							saida = "Depósito efetuado!";
 							request.setAttribute("saida", saida);
@@ -101,18 +101,18 @@ public class ContaPoupançaServlet extends HttpServlet {
 		rd.forward(request, response);
 	}
 
-	private String cadastrarConta(ContaPoupanca cp, HttpServletRequest request, HttpServletResponse response) {
+	private String cadastrarConta(ContaEspecial ce, HttpServletRequest request, HttpServletResponse response) {
 		
 		String numConta = request.getParameter("numConta");
 		String nome = request.getParameter("nome");
 		String saldo = request.getParameter("saldo");
-		String dataRend = request.getParameter("dataRend");
+		String limite = request.getParameter("limite");
 		
-		cp.setCliente(nome);
-		cp.setNum_conta(Integer.parseInt(numConta));
-		cp.setSaldo(Integer.parseInt(saldo));
-		cp.setDiaDeRendimento(Integer.parseInt(dataRend));
-		Poupancas.add(cp);
+		ce.setCliente(nome);
+		ce.setNum_conta(Integer.parseInt(numConta));
+		ce.setSaldo(Integer.parseInt(saldo));
+		ce.setLimite(Integer.parseInt(limite));
+		Especiais.add(ce);
 		return "Conta Cadastrada";
 		
 	}

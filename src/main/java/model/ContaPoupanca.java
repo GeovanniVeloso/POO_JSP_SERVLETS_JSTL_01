@@ -21,7 +21,7 @@ public class ContaPoupanca extends ContaBancaria {
 	}
 
 	@Override
-	public void sacar(float retirada) {
+	public void sacar(float retirada) throws ArithmeticException {
 		if (retirada > getSaldo()) {
 			String e = "Valor ultrapassa saldo";
 			throw new ArithmeticException(e);

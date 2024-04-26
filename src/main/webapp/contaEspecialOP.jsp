@@ -18,7 +18,7 @@
 	</nav>
 
 	<div align="center">
-		<form action="ContaPoupança" method="post">
+		<form action="ContaEspecial" method="post">
 			<table>
 				<tr>
 					<td><input type="number" min="0" step="1" id="numConta"

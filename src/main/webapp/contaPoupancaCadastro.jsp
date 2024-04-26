@@ -14,7 +14,7 @@
 			<li><a href="index.jsp">Home</a></li>
 			<li><a href="contaPoupancaCadastro.jsp">Cadastro Poupança</a></li>
 			<li><a href="contaEspecialCadastro.jsp">Cadastro Especial</a></li>
-			<li><a href="contaPoupancaOP.jsp">Operações Poupança</a></li>
+			<li><a href="contaPoupancaOp.jsp">Operações Poupança</a></li>
 		</ul>
 	</nav>
 
@@ -56,7 +56,9 @@
 			<c:out value="${saida}"></c:out>
 		</div>
 	</c:if>
-	<c:if test="${not empty ContaP} ">
+	<c:if test="${not empty conta}">
+		<div align="center">
+			<c:if test="${not empty conta} ">
 		<div align="center">
 			<table>
 				<thead>
@@ -64,7 +66,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach var="cp" items="${ContaP }">
+					<c:forEach var="cp" items="${conta}">
 						<tr>
 							<td>${cp.numConta }</td>
 							<td>${cp.nome }</td>
@@ -74,6 +76,8 @@
 					</c:forEach>
 				</tbody>
 			</table>
+		</div>
+	</c:if>
 		</div>
 	</c:if>
 
